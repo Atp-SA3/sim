@@ -14,6 +14,7 @@
         margin: 0;
         padding: 0;
         text-align: center;
+        overflow-x: hidden;
     }
 
     header {
@@ -36,6 +37,7 @@
         background: #333;
         border-bottom: 2px solid #555;
         padding: 10px 0;
+        flex-wrap: wrap;
     }
 
     nav button {
@@ -43,12 +45,13 @@
         border: 2px solid #555;
         color: #ccc;
         padding: 10px 20px;
-        margin: 0 5px;
+        margin: 5px;
         cursor: pointer;
         font-family: inherit;
         font-size: 12px;
         transition: all 0.2s;
         text-shadow: 1px 1px #000;
+        flex: 1 1 auto;
     }
 
     nav button:hover {
@@ -67,6 +70,8 @@
         border: 2px solid #555;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        word-wrap: break-word;
+        overflow-x: auto;
     }
 
     .tab.active {
@@ -84,17 +89,20 @@
         background: #111;
         padding: 15px;
         margin: 10px auto;
-        max-width: 600px;
+        max-width: 100%;
         border: 2px dashed #555;
         overflow-x: auto;
         font-family: monospace;
         color: #ccc;
+        font-size: 11px;
+        text-align: left;
     }
 
     a {
         color: #bbb;
         text-decoration: none;
         transition: all 0.2s;
+        word-break: break-all;
     }
 
     a:hover {
@@ -123,6 +131,8 @@
         max-width: 200px;
         margin-left: auto;
         margin-right: auto;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .cute-options button {
@@ -134,11 +144,44 @@
         font-size: 10px;
         transform: rotate(var(--angle, 0deg));
         transition: transform 0.3s;
+        flex: 1 1 40%;
     }
 
     .cute-options button:hover {
         background: #444;
         color: #fff;
+    }
+
+    /* Responsividade mínima */
+    @media (max-width: 600px) {
+        header h1 {
+            font-size: 20px;
+        }
+
+        nav {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav button {
+            width: 90%;
+            font-size: 10px;
+            margin: 4px 0;
+        }
+
+        .tab {
+            width: 90%;
+            margin: 15px auto;
+            padding: 15px;
+        }
+
+        code {
+            font-size: 10px;
+        }
+
+        footer {
+            font-size: 9px;
+        }
     }
 </style>
 </head>
@@ -200,7 +243,7 @@ console.log("kreed buxa");
 
 <div id="sobre" class="tab">
     <h2>Sobre Mim</h2>
-    <p>Meu nome é Atp. Sou desenvolvedor de códigos em C, JavaScript, Python, HTML e CSS. Gosto de criar projetos com o propósito de causar desconforto em quem vê, claro, só para os mais íntimos.(cute não pode saber que eu ja fiz uma animação 3d dele tomando benga).</p>
+    <p>Meu nome é Atp. Sou desenvolvedor de códigos em C, JavaScript, Python, HTML e CSS. Gosto de criar projetos com o propósito de causar desconforto em quem vê, claro, só para os mais íntimos.</p>
 
     <div class="cute-check">
         ✔ feito pelo cute, está centralizado?
@@ -222,7 +265,6 @@ console.log("kreed buxa");
     </ul>
 </div>
 
-<!-- Sons retrô -->
 <audio id="clickSound" src="https://www.myinstants.com/media/sounds/button-3.mp3"></audio>
 <audio id="hoverSound" src="https://www.myinstants.com/media/sounds/pop-up-sound.mp3"></audio>
 
@@ -231,7 +273,6 @@ function openTab(tabId) {
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(t => t.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-
     const click = document.getElementById('clickSound');
     click.currentTime = 0;
     click.play();
@@ -245,11 +286,8 @@ function hoverSound() {
 
 function responder(resposta) {
     const resp = document.getElementById('resposta');
-    if (resposta === 'sim') {
-        resp.innerText = 'você não vale, cute.';
-    } else {
-        resp.innerText = 'obviamente você que está torto.';
-    }
+    if (resposta === 'sim') resp.innerText = 'você não vale, cute.';
+    else resp.innerText = 'obviamente você que está torto.';
 }
 </script>
 
